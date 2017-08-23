@@ -1,0 +1,11 @@
+{
+  "name": "dsafio",
+  "version": "0.1.0",
+  "author": "Joel Wallis Jucá <joelwallis@gmail.com>",
+  "bin": {
+    "dsafio": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
