@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "author": "Joel Wallis Jucá <joelwallis@gmail.com>",
   "bin": {
-    "dsafio": "bin/cli.js"
+    "dsafio": "bin/dsafio.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DSAFIO_CONFIG_FILE=./.dsafiorc mocha -b --recursive",
+    "test:watch": "DSAFIO_CONFIG_FILE=./.dsafiorc mocha -bw --recursive"
   },
   "dependencies": {
-    "commander": "^2.11.0"
+    "commander": "^2.11.0",
+    "debug": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "sinon": "^3.2.1"
   }
 }

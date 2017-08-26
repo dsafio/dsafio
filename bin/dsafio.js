@@ -5,6 +5,5 @@ const package = require('../package.json')
 
 program
   .version(package.version)
+  .command('config <get|set> [key=value...]', 'get/set user configuration')
   .parse(process.argv)
-
-console.log('Hello fom Dsafio!')
