@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const fs      = require('fs')
-const os      = require('os')
 const package = require('../package.json')
 const config  = require('../lib/config')
 
