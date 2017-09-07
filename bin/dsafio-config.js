@@ -28,7 +28,9 @@ switch (operation) {
         .join('\n'))
       .then(console.info.bind(console))
       .catch(error => {
-        console.error(error)
+        ['EACCES', 'ENOENT'].includes(error.code)
+          ? console.error('Inaccessible or inexistent configuration file')
+          : console.error('Something went wrong while reading configuration file')
         process.exit(1)
       })
     break;
@@ -44,7 +46,9 @@ switch (operation) {
       })
       .then(config.set)
       .catch(error => {
-        console.error('Not implemented yet.')
+        ['EACCES', 'ENOENT'].includes(error.code)
+          ? console.error('Inaccessible or inexistent configuration file')
+          : console.error('Something went wrong while reading configuration file')
         process.exit(1)
       })
     break;
