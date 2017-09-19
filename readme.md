@@ -1,4 +1,4 @@
-# [Dsafio](https://github.com/dsafio/dsafio) 🤘
+# [Dsafio](https://github.com/dsafio/dsafio) 🤘 ![](https://travis-ci.org/dsafio/dsafio.svg?branch=master)
 
 Practicing tool for coders.
 
