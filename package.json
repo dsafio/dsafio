@@ -6,12 +6,14 @@
     "dsafio": "bin/dsafio.js"
   },
   "scripts": {
-    "test": "DSAFIO_CONFIG_FILE=./.dsafiorc mocha -b --recursive",
+    "test": "DSAFIO_CACHE_FILE=./registry.json DSAFIO_CONFIG_FILE=./.dsafiorc mocha -b --recursive",
     "test:watch": "DSAFIO_CONFIG_FILE=./.dsafiorc mocha -bw --recursive"
   },
   "dependencies": {
     "commander": "^2.11.0",
-    "debug": "^3.0.1"
+    "debug": "^3.0.1",
+    "request": "^2.82.0",
+    "request-promise-native": "^1.0.4"
   },
   "devDependencies": {
     "chai": "^4.1.1",
