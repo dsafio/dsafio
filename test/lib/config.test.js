@@ -2,7 +2,7 @@ const chai   = require('chai')
 const sinon  = require('sinon')
 const util   = require('util')
 const config = require('../../lib/config')
-const io     = require('../../lib/config-io')
+const fs     = require('../../lib/fs-as-promise')
 
 const assert = chai.assert
 const expect = chai.expect
@@ -13,11 +13,11 @@ describe('lib/config', function () {
 
   describe('get()', function () {
 
-    beforeEach(() => sinon.stub(io, 'read').returns(Promise.resolve(JSON.stringify({
+    beforeEach(() => sinon.stub(fs, 'readFile').returns(Promise.resolve(JSON.stringify({
       user: 'john-doe',
       email: 'john@doe.com'
     }))))
-    afterEach(() => io.read.restore())
+    afterEach(() => fs.readFile.restore())
 
     it('is a function', () => expect(config.get).to.be.a('function'))
 
@@ -40,12 +40,12 @@ describe('lib/config', function () {
   describe('set()', function () {
 
     beforeEach(() => {
-      sinon.stub(io, 'read').returns(Promise.resolve('{}'))
-      sinon.stub(io, 'write')
+      sinon.stub(fs, 'readFile').returns(Promise.resolve('{}'))
+      sinon.stub(fs, 'writeFile')
     })
     afterEach(() => {
-      io.read.restore()
-      io.write.restore()
+      fs.readFile.restore()
+      fs.writeFile.restore()
     })
 
     it('is a function', () => expect(config.set).to.be.a('function'))
@@ -59,11 +59,11 @@ describe('lib/config', function () {
       expect(config.set({foo: 'bar'})).to.be.a('promise')
     })
 
-    it('uses config-io to write user configurations to disk', function () {
+    it('uses lib/fs-as-promise to write user configurations to disk', function () {
       return config.set({foo: 'bar'})
         .then(() => {
-          expect(io.read.called).to.be.ok
-          expect(io.write.withArgs('{\n  "foo": "bar"\n}').called).to.be.ok
+          expect(fs.readFile.called).to.be.ok
+          expect(fs.writeFile.withArgs(config.CONFIG_FILE, '{\n  "foo": "bar"\n}', 'utf8').called).to.be.ok
         })
     })
 
