@@ -1,10 +1,9 @@
 const chai   = require('chai')
 const sinon  = require('sinon')
-const util   = require('util')
 const config = require('../../lib/config')
 const fs     = require('../../lib/fs-as-promise')
 
-const assert = chai.assert
+chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
 describe('lib/config', function () {
@@ -21,18 +20,33 @@ describe('lib/config', function () {
 
     it('is a function', () => expect(config.get).to.be.a('function'))
 
-    it('accepts an array as argument', function () {
-      expect(() => config.get()).to.not.throw()
-      expect(() => config.get(['user', 'email'])).to.not.throw()
+    it('accepts an array as argument', () => {
+      return Promise.all([
+        expect(config.get()).to.be.fulfilled,
+        expect(config.get(['user', 'email'])).to.be.fulfilled
+      ])
+    })
 
-      ;['foo', true, 123, null, [], {}].forEach(value => {
-        expect(() => config.get(value)).to.throw()
-      })
+    it('rejects when passed argument other than array', () => {
+      return Promise.all(['foo', true, 123, null, [], {}].map(value => {
+        return expect(config.get(value)).to.be.rejected
+      }))
     })
 
     it('returns a promise', function () {
-      expect(config.get()).to.be.a('promise')
-      expect(config.get(['user', 'email'])).to.be.a('promise')
+      const promises = []
+
+      expect((() => {
+        promises.push(config.get())
+        return promises.slice(-1)[0]
+      })()).to.be.a('promise')
+
+      expect((() => {
+        promises.push(config.get(['user', 'email']))
+        return promises.slice(-1)[0]
+      })()).to.be.a('promise')
+
+      return Promise.all(promises)
     })
 
   })
@@ -50,21 +64,26 @@ describe('lib/config', function () {
 
     it('is a function', () => expect(config.set).to.be.a('function'))
 
-    it('requires an object argument', function () {
-      expect(config.set).to.throw()
-      expect(() => config.set({foo: 'bar'})).to.not.throw()
+    it('requires an object argument', () => {
+      return expect(config.set({foo: 'bar'})).to.be.fulfilled
+    })
+
+    it('rejects when calling without arguments', () => {
+      return expect(config.set()).to.be.rejected
     })
 
     it('returns a promise', function () {
-      expect(config.set({foo: 'bar'})).to.be.a('promise')
+      let promise
+      expect(promise = config.set({foo: 'bar'})).to.be.a('promise')
+      return promise
     })
 
     it('uses lib/fs-as-promise to write user configurations to disk', function () {
-      return config.set({foo: 'bar'})
+      return expect(config.set({foo: 'bar'})
         .then(() => {
           expect(fs.readFile.called).to.be.ok
           expect(fs.writeFile.withArgs(config.CONFIG_FILE, '{\n  "foo": "bar"\n}', 'utf8').called).to.be.ok
-        })
+        })).to.be.fulfilled
     })
 
   })
