@@ -6,8 +6,8 @@
     "dsafio": "bin/dsafio.js"
   },
   "scripts": {
-    "test": "DSAFIO_CACHE_FILE=./registry.json DSAFIO_CONFIG_FILE=./.dsafiorc mocha -b --recursive",
-    "test:watch": "DSAFIO_CONFIG_FILE=./.dsafiorc mocha -bw --recursive"
+    "test": "mocha -b --recursive",
+    "test:watch": "mocha -bw --recursive"
   },
   "dependencies": {
     "commander": "^2.11.0",
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
     "mocha": "^3.5.0",
     "sinon": "^3.2.1"
   }
