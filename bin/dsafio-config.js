@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-
+/* eslint-disable no-multi-spaces */
 const program = require('commander')
-const package = require('../package.json')
+const pkg     = require('../package.json')
 const config  = require('../lib/config')
-
+/* eslint-enable no-multi-spaces */
 program
-  .version(package.version)
+  .version(pkg.version)
   .parse(process.argv)
 
 const operation = program.args.shift()
@@ -16,7 +16,6 @@ if (!['get', 'set'].includes(operation)) {
 }
 
 switch (operation) {
-
   case 'get':
     var args
 
@@ -33,7 +32,7 @@ switch (operation) {
           : console.error('Something went wrong while reading configuration file')
         process.exit(1)
       })
-    break;
+    break
 
   case 'set':
     Promise.resolve()
@@ -51,5 +50,5 @@ switch (operation) {
           : console.error('Something went wrong while reading configuration file')
         process.exit(1)
       })
-    break;
+    break
 }
