@@ -4,6 +4,7 @@ const sinon    = require('sinon')
 const fs       = require('../../lib/fs-as-promise')
 const registry = require('../../lib/registry')
 /* eslint-enable no-multi-spaces */
+
 const expect = chai.expect
 
 /* eslint-env mocha */

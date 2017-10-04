@@ -4,10 +4,12 @@ const sinon  = require('sinon')
 const config = require('../../lib/config')
 const fs     = require('../../lib/fs-as-promise')
 /* eslint-enable no-multi-spaces */
+
 chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
 /* eslint-env mocha */
+/* eslint-disable no-unused-expressions */
 describe('lib/config', function () {
   it('is an object', () => expect(config).to.be.an('object'))
 
@@ -76,7 +78,6 @@ describe('lib/config', function () {
       return promise
     })
 
-    /* eslint no-unused-expressions:0 */
     it('uses lib/fs-as-promise to write user configurations to disk', function () {
       return expect(config.set({foo: 'bar'})
         .then(() => {

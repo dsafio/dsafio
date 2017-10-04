@@ -1,9 +1,11 @@
 #!/usr/bin/env node
+
 /* eslint-disable no-multi-spaces */
 const program = require('commander')
 const pkg     = require('../package.json')
 const config  = require('../lib/config')
 /* eslint-enable no-multi-spaces */
+
 program
   .version(pkg.version)
   .parse(process.argv)
