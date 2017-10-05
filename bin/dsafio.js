@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-multi-spaces */
 const program = require('commander')
-const package = require('../package.json')
+const pkg     = require('../package.json')
+/* eslint-enable no-multi-spaces */
 
 program
-  .version(package.version)
+  .version(pkg.version)
   .command('config <get|set> [key=value...]', 'get/set user configuration')
   .parse(process.argv)

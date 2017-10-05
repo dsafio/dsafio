@@ -1,16 +1,17 @@
+/* eslint-disable no-multi-spaces */
 const chai     = require('chai')
 const sinon    = require('sinon')
 const fs       = require('../../lib/fs-as-promise')
 const registry = require('../../lib/registry')
+/* eslint-enable no-multi-spaces */
 
 const expect = chai.expect
 
+/* eslint-env mocha */
 describe('lib/registry', function () {
-
   it('is an object', () => expect(registry).to.be.an('object'))
 
   describe('get()', function () {
-
     beforeEach(() => {
       sinon.stub(fs, 'readFile').returns(Promise.resolve(JSON.stringify({
         foo: 'foo',
@@ -51,7 +52,5 @@ describe('lib/registry', function () {
         return promises.slice(-1)[0]
       })()).to.be.a('promise')
     })
-
   })
-
 })
