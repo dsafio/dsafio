@@ -1,4 +1,4 @@
-# [Dsafio](https://github.com/dsafio/dsafio) 🤘 ![](https://travis-ci.org/dsafio/dsafio.svg?branch=master)
+# [Dsafio](https://github.com/dsafio/dsafio) 🤘 [![Build Status](https://travis-ci.org/dsafio/dsafio.svg?branch=master)](https://travis-ci.org/dsafio/dsafio) [![Greenkeeper badge](https://badges.greenkeeper.io/dsafio/dsafio.svg)](https://greenkeeper.io/)
 
 Practicing tool for coders.
 
