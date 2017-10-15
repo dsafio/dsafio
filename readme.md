@@ -1,4 +1,4 @@
-# [Dsafio](https://github.com/dsafio/dsafio) 🤘 [![Build Status](https://travis-ci.org/dsafio/dsafio.svg?branch=master)](https://travis-ci.org/dsafio/dsafio) [![Greenkeeper badge](https://badges.greenkeeper.io/dsafio/dsafio.svg)](https://greenkeeper.io/)
+# [Dsafio](https://github.com/dsafio/dsafio) 🤘 [![Build Status](https://travis-ci.org/dsafio/dsafio.svg?branch=master)](https://travis-ci.org/dsafio/dsafio) [![Greenkeeper badge](https://badges.greenkeeper.io/dsafio/dsafio.svg)](https://greenkeeper.io/) [![NSP Status](https://nodesecurity.io/orgs/dsafio/projects/63c12bdb-a9ac-4a22-91e0-dcaf60d6a92f/badge)](https://nodesecurity.io/orgs/dsafio/projects/63c12bdb-a9ac-4a22-91e0-dcaf60d6a92f)
 
 Practicing tool for coders.
 
