@@ -13,6 +13,7 @@
   "dependencies": {
     "commander": "^2.11.0",
     "debug": "^3.0.1",
+    "mkdirp": "^0.5.1",
     "request": "^2.82.0",
     "request-promise-native": "^1.0.4"
   },
