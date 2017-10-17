@@ -1,10 +1,12 @@
 /* eslint-disable no-multi-spaces */
 const chai     = require('chai')
+const request  = require('request')
 const sinon    = require('sinon')
 const fs       = require('../../lib/fs-as-promise')
 const registry = require('../../lib/registry')
 /* eslint-enable no-multi-spaces */
 
+chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
 /* eslint-env mocha */
@@ -17,11 +19,13 @@ describe('lib/registry', function () {
         foo: 'foo',
         bar: 'bar'
       })))
-      sinon.stub(fs, 'writeFile')
+      sinon.stub(fs, 'writeFile').returns(Promise.resolve())
+      sinon.stub(request, 'get')
     })
     afterEach(() => {
       fs.readFile.restore()
       fs.writeFile.restore()
+      request.get.restore()
     })
 
     it('is a function', () => expect(registry.get).to.be.a('function'))
