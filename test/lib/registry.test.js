@@ -1,6 +1,6 @@
 /* eslint-disable no-multi-spaces */
 const chai     = require('chai')
-const request  = require('request')
+const request  = require('request-promise-native')
 const sinon    = require('sinon')
 const fs       = require('../../lib/fs-as-promise')
 const registry = require('../../lib/registry')
@@ -11,23 +11,33 @@ const expect = chai.expect
 
 /* eslint-env mocha */
 describe('lib/registry', function () {
-  it('is an object', () => expect(registry).to.be.an('object'))
-
-  describe('get()', function () {
-    beforeEach(() => {
-      sinon.stub(fs, 'readFile').returns(Promise.resolve(JSON.stringify({
+  beforeEach(() => {
+    sinon.stub(fs, 'readFile')
+      .returns(Promise.resolve(JSON.stringify({
         foo: 'foo',
         bar: 'bar'
       })))
-      sinon.stub(fs, 'writeFile').returns(Promise.resolve())
-      sinon.stub(request, 'get')
-    })
-    afterEach(() => {
-      fs.readFile.restore()
-      fs.writeFile.restore()
-      request.get.restore()
-    })
 
+    sinon.stub(fs, 'writeFile')
+      .returns(Promise.resolve())
+
+    sinon.stub(request, 'get')
+      .returns(Promise.resolve(JSON.stringify({
+        content: Buffer.from('{"foo":"foo"}', 'utf8').toString('base64')
+      })))
+  })
+
+  afterEach(() => {
+    fs.readFile.restore()
+    fs.writeFile.restore()
+    request.get.restore()
+  })
+
+  it('is an object', () => {
+    expect(registry).to.be.an('object')
+  })
+
+  describe('get()', function () {
     it('is a function', () => expect(registry.get).to.be.a('function'))
 
     it('accepts an array as argument', () => {
@@ -55,6 +65,39 @@ describe('lib/registry', function () {
         promises.push(registry.get(['foo', 'bar']))
         return promises.slice(-1)[0]
       })()).to.be.a('promise')
+    })
+  })
+
+  describe('update()', function () {
+    it('is a function', () => expect(registry.update).to.be.a('function'))
+
+    it('returns a promise', () => expect(registry.update()).to.be.a('promise'))
+
+    it('updates the registry', function () {
+      return registry.get()
+        .then(entries => {
+          expect(entries).to.be.an('object')
+          expect(entries.foo).to.be.ok
+        })
+        .then(() => {
+          fs.readFile.restore()
+          request.get.restore()
+
+          sinon.stub(fs, 'readFile')
+            .callsFake(() => Promise.reject())
+
+          sinon.stub(request, 'get')
+            .returns(Promise.resolve(JSON.stringify({
+              content: Buffer.from('{"updated": true}', 'utf8').toString('base64')
+            })))
+        })
+        .then(registry.update)
+        .then(() => registry.get())
+        .then(entries => {
+          expect(entries).to.be.an('object')
+          expect(entries.foo).to.not.be.ok
+          expect(entries.updated).to.be.ok
+        })
     })
   })
 })
