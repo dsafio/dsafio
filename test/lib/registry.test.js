@@ -13,10 +13,7 @@ const expect = chai.expect
 describe('lib/registry', function () {
   beforeEach(() => {
     sinon.stub(fs, 'readFile')
-      .returns(Promise.resolve(JSON.stringify({
-        foo: 'foo',
-        bar: 'bar'
-      })))
+      .returns(Promise.resolve(JSON.stringify({ foo: 'foo' })))
 
     sinon.stub(fs, 'writeFile')
       .returns(Promise.resolve())
@@ -77,14 +74,15 @@ describe('lib/registry', function () {
       return registry.get()
         .then(entries => {
           expect(entries).to.be.an('object')
-          expect(entries.foo).to.be.ok
+          expect(entries.foo).to.be.a('string')
+          expect(entries.foo).to.equal('foo')
         })
         .then(() => {
           fs.readFile.restore()
           request.get.restore()
 
           sinon.stub(fs, 'readFile')
-            .callsFake(() => Promise.reject())
+            .callsFake(() => Promise.reject(new Error()))
 
           sinon.stub(request, 'get')
             .returns(Promise.resolve(JSON.stringify({
@@ -95,8 +93,9 @@ describe('lib/registry', function () {
         .then(() => registry.get())
         .then(entries => {
           expect(entries).to.be.an('object')
-          expect(entries.foo).to.not.be.ok
-          expect(entries.updated).to.be.ok
+          expect(entries.foo).to.equal(undefined)
+          expect(entries.updated).to.be.a('boolean')
+          expect(entries.updated).to.equal(true)
         })
     })
   })
