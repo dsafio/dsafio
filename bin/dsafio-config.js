@@ -29,6 +29,7 @@ switch (operation) {
     debug(`arguments: ${args}`)
 
     debug('loading configuration')
+
     config.get(args)
       .then(entries => {
         debug('configuration loaded:', entries)
