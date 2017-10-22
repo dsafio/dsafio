@@ -2,6 +2,7 @@
   "name": "dsafio",
   "version": "0.1.2",
   "author": "Joel Wallis Jucá <joelwallis@gmail.com>",
+  "license": "MIT",
   "bin": {
     "dsafio": "bin/dsafio.js"
   },
