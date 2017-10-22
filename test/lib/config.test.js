@@ -1,3 +1,9 @@
+/*!
+ * Dsafio
+ * Copyright (c) 2017 Joel Wallis Jucá <joelwallis@gmail.com>
+ * MIT Licensed
+ */
+
 /* eslint-disable no-multi-spaces */
 const chai   = require('chai')
 const sinon  = require('sinon')

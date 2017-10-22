@@ -68,3 +68,7 @@ npm test
 ## Style Guide 🌷
 
 We use [JavaScript Standard Style](https://standardjs.com).
+
+## License 📄
+
+[MIT](license)

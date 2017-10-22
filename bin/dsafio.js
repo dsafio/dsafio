@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+/*!
+ * Dsafio
+ * Copyright (c) 2017 Joel Wallis Jucá <joelwallis@gmail.com>
+ * MIT Licensed
+ */
 
 /* eslint-disable no-multi-spaces */
 const program = require('commander')
