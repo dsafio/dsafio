@@ -6,7 +6,7 @@
 
 /* eslint-disable no-multi-spaces */
 const chai      = require('chai')
-const request   = require('request-promise-native')
+const got       = require('got')
 const sinon     = require('sinon')
 const challenge = require('../../lib/challenge')
 const registry  = require('../../lib/registry')
@@ -35,11 +35,13 @@ describe('lib/challenge', function () {
 
   describe('fetch()', function () {
     beforeEach(() => {
-      sinon.stub(request, 'get')
-        .callsFake(url => Promise.resolve(JSON.stringify({
-          name: url.substr(url.lastIndexOf('/') + 1),
-          content: Buffer.from('<content>').toString('base64')
-        })))
+      sinon.stub(got, 'get')
+        .callsFake(url => Promise.resolve({
+          body: JSON.stringify({
+            name: url.substr(url.lastIndexOf('/') + 1),
+            content: Buffer.from('<content>').toString('base64')
+          })
+        }))
       sinon.stub(registry, 'get')
         .callsFake(() => Promise.resolve({
           challenges: FAKE_CHALLENGES().reduce((challenges, challenge) => {
@@ -49,7 +51,7 @@ describe('lib/challenge', function () {
     })
     afterEach(() => {
       registry.get.restore()
-      request.get.restore()
+      got.get.restore()
     })
 
     it('is a function', () => expect(challenge.fetch).to.be.a('function'))
