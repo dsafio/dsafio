@@ -46,7 +46,7 @@ describe('lib/registry', function () {
     it('accepts an array as argument', () => {
       return Promise.all([
         expect(registry.get()).to.be.fulfilled,
-        expect(registry.get(['foo', 'bar'])).to.be.fulfilled
+        expect(registry.get(['foo'])).to.be.fulfilled
       ])
     })
 
