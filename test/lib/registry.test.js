@@ -6,7 +6,7 @@
 
 /* eslint-disable no-multi-spaces */
 const chai     = require('chai')
-const request  = require('request-promise-native')
+const got      = require('got')
 const sinon    = require('sinon')
 const fs       = require('../../lib/fs-as-promise')
 const registry = require('../../lib/registry')
@@ -24,16 +24,18 @@ describe('lib/registry', function () {
     sinon.stub(fs, 'writeFile')
       .returns(Promise.resolve())
 
-    sinon.stub(request, 'get')
-      .returns(Promise.resolve(JSON.stringify({
-        content: Buffer.from('{"foo":"foo"}', 'utf8').toString('base64')
-      })))
+    sinon.stub(got, 'get')
+      .returns(Promise.resolve({
+        body: JSON.stringify({
+          content: Buffer.from('{"foo":"foo"}', 'utf8').toString('base64')
+        })
+      }))
   })
 
   afterEach(() => {
     fs.readFile.restore()
     fs.writeFile.restore()
-    request.get.restore()
+    got.get.restore()
   })
 
   it('is an object', () => {
@@ -85,15 +87,17 @@ describe('lib/registry', function () {
         })
         .then(() => {
           fs.readFile.restore()
-          request.get.restore()
+          got.get.restore()
 
           sinon.stub(fs, 'readFile')
             .callsFake(() => Promise.reject(new Error()))
 
-          sinon.stub(request, 'get')
-            .returns(Promise.resolve(JSON.stringify({
-              content: Buffer.from('{"updated": true}', 'utf8').toString('base64')
-            })))
+          sinon.stub(got, 'get')
+            .returns(Promise.resolve({
+              body: JSON.stringify({
+                content: Buffer.from('{"updated": true}', 'utf8').toString('base64')
+              })
+            }))
         })
         .then(registry.update)
         .then(() => registry.get())
