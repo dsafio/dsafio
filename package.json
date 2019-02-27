@@ -23,8 +23,8 @@
   },
   "dependencies": {
     "commander": "^2.11.0",
-    "debug": "^3.1.0",
-    "got": "^8.0.0",
+    "debug": "^4.0.0",
+    "got": "^9.0.0",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
