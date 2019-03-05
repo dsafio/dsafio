@@ -5,16 +5,13 @@
  * MIT Licensed
  */
 
-const program = require('commander')
-const pkg = require('../package.json')
-const registry = require('../lib/registry')
+const program = require("commander");
+const pkg = require("../package.json");
+const registry = require("../lib/registry");
 
-program
-  .version(pkg.version)
-  .parse(process.argv)
+program.version(pkg.version).parse(process.argv);
 
-registry.update()
-  .catch(error => {
-    console.error('Something went wrong while updating the registry')
-    process.exit(1)
-  })
+registry.update().catch(error => {
+  console.error("Something went wrong while updating the registry");
+  process.exit(1);
+});

@@ -5,11 +5,11 @@
  * MIT Licensed
  */
 
-const program = require('commander')
-const pkg = require('../package.json')
+const program = require("commander");
+const pkg = require("../package.json");
 
 program
   .version(pkg.version)
-  .command('config <get|set> [key=value...]', 'get/set user configuration')
-  .command('update', 'updates the registry from GitHub')
-  .parse(process.argv)
+  .command("config <get|set> [key=value...]", "get/set user configuration")
+  .command("update", "updates the registry from GitHub")
+  .parse(process.argv);
