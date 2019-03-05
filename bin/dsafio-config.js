@@ -73,7 +73,8 @@ switch (operation) {
 
         ;['EACCES', 'ENOENT'].includes(error.code)
           ? console.error('Inaccessible or inexistent configuration file')
-          : console.error('Something went wrong while reading configuration file')
+          : console.error(error.message)
+
         process.exit(1)
       })
     break
