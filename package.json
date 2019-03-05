@@ -19,11 +19,11 @@
   "scripts": {
     "test": "mocha -b --recursive",
     "test:watch": "mocha -w --recursive",
-    "lint": "standard --verbose"
+    "format": "prettier --no-config --write ./**/*.js",
+    "lint": "prettier -c --no-config ./**/*.js"
   },
   "dependencies": {
     "commander": "^2.11.0",
-    "debug": "^4.0.0",
     "got": "^9.0.0",
     "mkdirp": "^0.5.1"
   },
@@ -31,7 +31,7 @@
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "mocha": "^6.0.0",
-    "sinon": "^7.2.5",
-    "standard": "11.0.1"
+    "prettier": "^1.16.4",
+    "sinon": "^7.2.5"
   }
 }
