@@ -6,10 +6,9 @@
  */
 
 const program = require("commander");
-const pkg = require("../package.json");
 const registry = require("../lib/registry");
 
-program.version(pkg.version).parse(process.argv);
+program.parse(process.argv);
 
 registry.update().catch(error => {
   console.error("Something went wrong while updating the registry");
