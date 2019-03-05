@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "mocha -b --recursive",
-    "test:watch": "mocha -bw --recursive",
+    "test:watch": "mocha -w --recursive",
     "lint": "standard --verbose"
   },
   "dependencies": {
