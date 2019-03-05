@@ -4,18 +4,14 @@
  * MIT Licensed
  */
 
-/* eslint-disable no-multi-spaces */
-const chai   = require('chai')
-const sinon  = require('sinon')
+const chai = require('chai')
+const sinon = require('sinon')
 const config = require('../../lib/config')
-const fs     = require('../../lib/fs-as-promise')
-/* eslint-enable no-multi-spaces */
+const fs = require('../../lib/fs-as-promise')
 
 chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
-/* eslint-env mocha */
-/* eslint-disable no-unused-expressions */
 describe('lib/config', function () {
   it('is an object', () => expect(config).to.be.an('object'))
 

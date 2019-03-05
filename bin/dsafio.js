@@ -5,13 +5,8 @@
  * MIT Licensed
  */
 
-/* eslint-disable no-multi-spaces */
 const program = require('commander')
-const pkg     = require('../package.json')
-/* eslint-enable no-multi-spaces */
-
-const debug = require('debug')('dsafio/cli')
-debug('bootstrapping cli')
+const pkg = require('../package.json')
 
 program
   .version(pkg.version)

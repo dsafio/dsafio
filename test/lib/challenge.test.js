@@ -4,13 +4,11 @@
  * MIT Licensed
  */
 
-/* eslint-disable no-multi-spaces */
-const chai      = require('chai')
-const got       = require('got')
-const sinon     = require('sinon')
+const chai = require('chai')
+const got = require('got')
+const sinon = require('sinon')
 const challenge = require('../../lib/challenge')
-const registry  = require('../../lib/registry')
-/* eslint-enable no-multi-spaces */
+const registry = require('../../lib/registry')
 
 chai.use(require('chai-as-promised'))
 const expect = chai.expect
@@ -28,8 +26,6 @@ const FAKE_CHALLENGES = (function () {
   return () => ['hello-world', 'fizz-buzz', 'foo-bar'].map(fakeMeAChallenge)
 })()
 
-/* eslint-env mocha */
-/* eslint-disable no-unused-expressions */
 describe('lib/challenge', function () {
   it('is an object', () => expect(challenge).to.be.an('object'))
 

@@ -4,18 +4,15 @@
  * MIT Licensed
  */
 
-/* eslint-disable no-multi-spaces */
-const chai     = require('chai')
-const got      = require('got')
-const sinon    = require('sinon')
-const fs       = require('../../lib/fs-as-promise')
+const chai = require('chai')
+const got = require('got')
+const sinon = require('sinon')
+const fs = require('../../lib/fs-as-promise')
 const registry = require('../../lib/registry')
-/* eslint-enable no-multi-spaces */
 
 chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
-/* eslint-env mocha */
 describe('lib/registry', function () {
   beforeEach(() => {
     sinon.stub(fs, 'readFile')
