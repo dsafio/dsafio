@@ -4,8 +4,8 @@
  * MIT Licensed
  */
 
+const axios = require("axios");
 const chai = require("chai");
-const got = require("got");
 const sinon = require("sinon");
 const fs = require("../../lib/fs-as-promise");
 const registry = require("../../lib/registry");
@@ -21,11 +21,11 @@ describe("lib/registry", function() {
 
     sinon.stub(fs, "writeFile").returns(Promise.resolve());
 
-    sinon.stub(got, "get").returns(
+    sinon.stub(axios, "get").returns(
       Promise.resolve({
-        body: JSON.stringify({
+        data: {
           content: Buffer.from('{"foo":"foo"}', "utf8").toString("base64")
-        })
+        }
       })
     );
   });
@@ -33,7 +33,7 @@ describe("lib/registry", function() {
   afterEach(() => {
     fs.readFile.restore();
     fs.writeFile.restore();
-    got.get.restore();
+    axios.get.restore();
   });
 
   it("is an object", () => {
@@ -92,19 +92,19 @@ describe("lib/registry", function() {
         })
         .then(() => {
           fs.readFile.restore();
-          got.get.restore();
+          axios.get.restore();
 
           sinon
             .stub(fs, "readFile")
             .callsFake(() => Promise.reject(new Error()));
 
-          sinon.stub(got, "get").returns(
+          sinon.stub(axios, "get").returns(
             Promise.resolve({
-              body: JSON.stringify({
+              data: {
                 content: Buffer.from('{"updated": true}', "utf8").toString(
                   "base64"
                 )
-              })
+              }
             })
           );
         })
