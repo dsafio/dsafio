@@ -5,7 +5,7 @@
  */
 
 const chai = require("chai");
-const got = require("got");
+const axios = require("axios");
 const sinon = require("sinon");
 const challenge = require("../../lib/challenge");
 const registry = require("../../lib/registry");
@@ -31,12 +31,12 @@ describe("lib/challenge", function() {
 
   describe("fetch()", function() {
     beforeEach(() => {
-      sinon.stub(got, "get").callsFake(url =>
+      sinon.stub(axios, "get").callsFake(url =>
         Promise.resolve({
-          body: JSON.stringify({
+          data: {
             name: url.substr(url.lastIndexOf("/") + 1),
             content: Buffer.from("<content>").toString("base64")
-          })
+          }
         })
       );
       sinon.stub(registry, "get").callsFake(() =>
@@ -49,7 +49,7 @@ describe("lib/challenge", function() {
     });
     afterEach(() => {
       registry.get.restore();
-      got.get.restore();
+      axios.get.restore();
     });
 
     it("is a function", () => expect(challenge.fetch).to.be.a("function"));
