@@ -6,10 +6,9 @@
  */
 
 const program = require("commander");
-const pkg = require("../package.json");
 const config = require("../lib/config");
 
-program.version(pkg.version).parse(process.argv);
+program.parse(process.argv);
 
 const operation = program.args.shift();
 
