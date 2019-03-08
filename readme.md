@@ -71,7 +71,7 @@ npm test
 
 ## Style Guide 🌷
 
-We use [JavaScript Standard Style](https://standardjs.com).
+We use [Prettier](https://prettier.io).
 
 ## License 📄
 
