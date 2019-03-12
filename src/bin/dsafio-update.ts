@@ -14,3 +14,5 @@ registry.update().catch(error => {
   console.error("Something went wrong while updating the registry");
   process.exit(1);
 });
+
+export {};

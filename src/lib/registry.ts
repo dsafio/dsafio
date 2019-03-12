@@ -4,10 +4,11 @@
  * MIT Licensed
  */
 
-const axios = require("axios");
 const mkdirp = require("util").promisify(require("mkdirp"));
-const fs = require("./fs-as-promise");
-const pick = require("./helpers/pick");
+
+import axios from "axios";
+import * as fs from "./fs-as-promise";
+import { pick } from "./helpers/pick";
 
 /**
  * Holds the entire registry in RAM.
@@ -21,61 +22,39 @@ const CACHE_FILE =
 
 const API_BASE_URL = "https://api.github.com";
 
-function get(keys) {
-  if (keys !== undefined && (!Array.isArray(keys) || !keys.length)) {
-    return Promise.reject(
-      new Error("registry.get() accepts an array of configuration keys")
-    );
-  }
+export const get = (keys: string[]) =>
+  REGISTRY
+    ? Promise.resolve({ ...REGISTRY })
+    : Promise.resolve()
+        .then(loadFromDisk)
+        .catch(error => {
+          if (error.code === "ENOENT") return loadFromApi();
 
-  if (REGISTRY) {
-    return Promise.resolve({ ...REGISTRY });
-  }
+          throw error;
+        })
+        .then(cacheOnMemory)
+        .then(cacheOnDisk)
+        .then(entries => (!keys ? entries : pick(entries, keys)));
 
-  return Promise.resolve()
-    .then(loadFromDisk)
-    .catch(error => {
-      if (error.code === "ENOENT") return loadFromApi();
+const loadFromDisk = () => fs.readFile(CACHE_FILE, "utf8").then(JSON.parse);
 
-      throw error;
-    })
-    .then(cacheOnMemory)
-    .then(cacheOnDisk)
-    .then(entries => {
-      return !keys ? entries : pick(entries, keys);
-    });
-}
-
-function loadFromDisk() {
-  return fs.readFile(CACHE_FILE, "utf8").then(JSON.parse);
-}
-
-function loadFromApi() {
-  return axios
+const loadFromApi = () =>
+  axios
     .get(`${API_BASE_URL}/repos/dsafio/challenges/contents/registry.json`, {
       headers: { "User-Agent": "dsafio/dsafio" }
     })
     .then(response => response.data.content)
     .then(raw => Buffer.from(raw, "base64").toString())
     .then(JSON.parse);
-}
 
-function cacheOnMemory(registry) {
-  REGISTRY = { ...registry };
+const cacheOnMemory = registry => Promise.resolve((REGISTRY = registry));
 
-  return Promise.resolve(REGISTRY);
-}
-
-function cacheOnDisk(registry) {
-  return mkdirp(CACHE_HOME)
+const cacheOnDisk = registry =>
+  mkdirp(CACHE_HOME)
     .then(() => fs.writeFile(CACHE_FILE, JSON.stringify(registry), "utf8"))
     .then(() => registry);
-}
 
-function update() {
-  return loadFromApi()
+export const update = () =>
+  loadFromApi()
     .then(cacheOnMemory)
     .then(cacheOnDisk);
-}
-
-module.exports = { get, update };

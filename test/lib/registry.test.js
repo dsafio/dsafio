@@ -7,8 +7,8 @@
 const axios = require("axios");
 const chai = require("chai");
 const sinon = require("sinon");
-const fs = require("../../lib/fs-as-promise");
-const registry = require("../../lib/registry");
+const fs = require("../../dist/lib/fs-as-promise");
+const registry = require("../../dist/lib/registry");
 
 chai.use(require("chai-as-promised"));
 const expect = chai.expect;

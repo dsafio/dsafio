@@ -7,7 +7,5 @@
 const fs = require("fs");
 const util = require("util");
 
-module.exports = {
-  readFile: util.promisify(fs.readFile),
-  writeFile: util.promisify(fs.writeFile)
-};
+export const readFile = util.promisify(fs.readFile);
+export const writeFile = util.promisify(fs.writeFile);

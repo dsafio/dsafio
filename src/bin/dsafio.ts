@@ -13,3 +13,5 @@ program
   .command("config <get|set> [key=value...]", "get/set user configuration")
   .command("update", "updates the registry from GitHub")
   .parse(process.argv);
+
+export {};

@@ -11,24 +11,9 @@
  * @see https://www.npmjs.com/package/lodash.pick
  * @see https://lodash.com/docs/#pick
  */
-const pick = (source, keys) => {
-  if (!source || typeof source !== "object") {
-    throw new Error("Parameter `source` must be an object");
-  }
+export const pick = (source: object, keys?: string[]) =>
+  !keys
+    ? source
+    : keys.reduce((subset, key) => ({ ...subset, [key]: source[key] }), {});
 
-  if (keys !== undefined && !Array.isArray(keys)) {
-    throw new Error("Parameter `keys` must be an array");
-  }
-
-  if (!keys) return source;
-
-  return keys.reduce((subset, key) => {
-    if (!source.hasOwnProperty(key)) {
-      throw new Error(`Key \`${key}\` inexistent`);
-    }
-
-    return { ...subset, [key]: source[key] };
-  }, {});
-};
-
-module.exports = pick;
+export default pick;

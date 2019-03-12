@@ -6,7 +6,7 @@
 
 /* eslint-disable no-multi-spaces */
 const chai = require("chai");
-const pick = require("../../../lib/helpers/pick");
+const pick = require("../../../dist/lib/helpers/pick");
 /* eslint-enable no-multi-spaces */
 
 const expect = chai.expect;

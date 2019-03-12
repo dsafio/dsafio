@@ -10,11 +10,12 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "bin",
-    "lib"
+    "dist/bin",
+    "dist/lib"
   ],
+  "main": "dist/lib/dsafio.js",
   "bin": {
-    "dsafio": "bin/dsafio.js"
+    "dsafio": "dist/bin/dsafio.js"
   },
   "scripts": {
     "test": "mocha -b --recursive",
@@ -28,6 +29,7 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
+    "@types/node": "^11.10.5",
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "mocha": "^6.0.0",
