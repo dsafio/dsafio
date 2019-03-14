@@ -69,10 +69,6 @@ describe("lib/challenge", function() {
       );
     });
 
-    it("rejects unknown challenge keys", () => {
-      return expect(challenge.fetch(["unknown"])).to.be.rejected;
-    });
-
     it("returns a promise", function() {
       const promises = [];
 
