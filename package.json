@@ -29,10 +29,10 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
+    "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^6.0.0",
-    "prettier": "^1.16.4",
-    "sinon": "^7.2.5"
+    "mocha": "^6.2.0",
+    "prettier": "^1.18.2",
+    "sinon": "^7.4.2"
   }
 }
