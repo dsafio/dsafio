@@ -11,7 +11,7 @@ It's a [commander](https://github.com/tj/commander.js) powered [Node.js](https:/
 
 **Requirements**
 
-You need Node.js to run the CLI. We recommend [Node Version Manager](https://github.com/creationix/nvm) to manage your Node.js environment.
+You need Node.js to run the CLI. We recommend [asdf](https://asdf-vm.com) to manage your Node.js environment.
 
 **Install the CLI**
 
