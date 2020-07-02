@@ -7,7 +7,7 @@ Practicing tool for coders.
 
 ## Up and Running 🏃
 
-It's a [commander](https://github.com/tj/commander.js) powered [Node.js](https://nodejs.org) CLI.
+It's a [Commander.js](https://github.com/tj/commander.js) powered [Node.js](https://nodejs.org) CLI.
 
 **Requirements**
 
@@ -20,6 +20,8 @@ npm install -g dsafio
 ```
 
 ## Contributing 👷
+
+Dsafio is a Node.js command-line tool. You'll want to have the development version of the `dsafio` command in your `$PATH`. Besides it, it will feel like a normal Node.js project for you. It's built with [Commander.js](https://github.com/tj/commander.js), tested with [Mocha](https://mochajs.org), [Chai](https://www.chaijs.com) and [Sinon.JS](https://sinonjs.org), with [Prettier](https://prettier.io) as coding standard.
 
 **Development environment**
 
@@ -43,29 +45,30 @@ npm link
 
 `dsafio` command should now be available in your shell.
 
-**Contribution workflow**
+**Unlinking the development version**
 
-There are steps that you need to take before being able to start to
-contribute:
+If you ever need to unlink the global version (eg.: you want to install the production version directly from npm), you will want to unlink the development version first:
 
-1. Fork the repository (if you haven't yet)
-1. Clone your fork in your local machine
+```
+npm unlink
+```
 
-Then:
+**Conventional Commits**
 
-1. Find an issue to work on in our [issue tracker](https://github.com/dsafio/dsafio/issues)  
-   _If it's a new bug or feature, [create a new one](https://github.com/dsafio/dsafio/issues/new) and describe it in detail_
-1. Create a new branch to work on  
-   _`git checkout -b user-page-not-loading`_
-1. Commit your work  
-   _One commit per contribution (use `git commit --amend`)_
-1. Open a pull request and go through the review process
-1. Get your contribution accepted
+We use [Conventional Commits](https://www.conventionalcommits.org) in our commit history. It is a specification for commit messages that help us automate versioning processes. Please refer to its website for more information.
 
 ## Testing ✅
 
+Test can be run with the following command:
+
 ```
 npm test
+```
+
+It's possible to run them in watch mode:
+
+```
+npm run test:watch
 ```
 
 ## Style Guide 🌷
