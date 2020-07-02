@@ -2,7 +2,6 @@
 
 [![Travis CI](https://travis-ci.org/dsafio/dsafio.svg?branch=master)](https://travis-ci.org/dsafio/dsafio)
 [![Snyk](https://snyk.io/test/github/dsafio/dsafio/badge.svg)](https://snyk.io/test/github/dsafio/dsafio)
-[![Greenkeeper](https://badges.greenkeeper.io/dsafio/dsafio.svg)](https://greenkeeper.io/)
 
 Practicing tool for coders.
 
