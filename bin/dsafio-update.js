@@ -10,7 +10,7 @@ const registry = require("../lib/registry");
 
 program.parse(process.argv);
 
-registry.update().catch(error => {
+registry.update().catch((error) => {
   console.error("Something went wrong while updating the registry");
   process.exit(1);
 });

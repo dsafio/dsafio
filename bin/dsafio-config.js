@@ -25,13 +25,13 @@ switch (operation) {
 
     config
       .get(args)
-      .then(entries => {
+      .then((entries) => {
         return Object.keys(entries)
-          .map(key => `${key}=${entries[key]}`)
+          .map((key) => `${key}=${entries[key]}`)
           .join("\n");
       })
       .then(console.info.bind(console))
-      .catch(error => {
+      .catch((error) => {
         ["EACCES", "ENOENT"].includes(error.code)
           ? console.error("Inaccessible or inexistent configuration file")
           : console.error(
@@ -50,10 +50,10 @@ switch (operation) {
 
         return { [program.args[0]]: program.args[1] };
       })
-      .then(entries => {
+      .then((entries) => {
         config.set(entries);
       })
-      .catch(error => {
+      .catch((error) => {
         ["EACCES", "ENOENT"].includes(error.code)
           ? console.error("Inaccessible or inexistent configuration file")
           : console.error(error.message);
