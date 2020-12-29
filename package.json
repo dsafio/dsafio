@@ -23,7 +23,7 @@
     "lint": "prettier -c --no-config ./**/*.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "commander": "^2.11.0",
     "lodash.pick": "^4.4.0",
     "mkdirp": "^0.5.1"
